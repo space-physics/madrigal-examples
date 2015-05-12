@@ -56,14 +56,20 @@ def getexpdata(madobj,code,odir):
                                     day=e.endday,hour=e.endhour,minute=e.endmin,
                                     second=e.endsec)
 #%%
+    exparams=[]
     for i in experiments.index:
-        print('downloading experiment id {}  '.format(i),end='')
+        print('downloading experiment id {} '.format(i))
         expfile = madobj.getExperimentFiles(i)
         experiments.at[i,'fn'] = expfile.name
-        print(expfile.name)
-        madobj.downloadFile(expfile, join(odir,expfile.name),"hdf5")
 
-    return experiments
+        exparams.append(madobj.getExperimentFileParameters(expfile))
+
+       #not yet
+        #ofn = join(odir,expfile.name)
+       #print('saving {}'.format(ofn))
+        #madobj.downloadFile(expfile, ofn,"hdf5")
+
+    return experiments,exparams
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
@@ -78,4 +84,4 @@ if __name__ == '__main__':
 
     pfisr={'code':madname2code(madobj,p.inst)} #get the PFISR code
 
-    data,experiments = getexpdata(madobj,pfisr['code'],p.odir)
+    experiments,exparams = getexpdata(madobj,pfisr['code'],p.odir)
