@@ -4,7 +4,6 @@ basic example of using Madrigal to query data
 Michael Hirsch
 https://scivision.co/madrigal-api-install-and-basic-example-for-geospace-remote-sensing-query/
 
-This should download a bunch of HDF5 files, but the SRI website was down, so I was unable to complete testing.
 """
 from __future__ import print_function,division
 from six import PY3
