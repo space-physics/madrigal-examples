@@ -43,7 +43,7 @@ def getexpdata(madobj,code,odir):
     # this is list of all experiments for this instrument for all time
     # iterate over this to get data files for each experiment
     print('downloading experiment codes')
-    exps = madobj.getExperiments(code,1900,1,1,0,0,0,2100,1,1,0,0,0,local=1)
+    exps = madobj.getExperiments(code,1900,1,1,0,0,0,2100,1,1,0,0,0,local=0)
     # let's put this experiment list in a user-friendly format
     # there might be a better way to do this to allow better querying vs. time
     experiments = DataFrame(index=[e.id for e in exps],columns=['start','end','fn'])
@@ -73,7 +73,7 @@ def getexpdata(madobj,code,odir):
 if __name__ == '__main__':
     from argparse import ArgumentParser
     p = ArgumentParser(description="basic example of using Madrigal")
-    p.add_argument('--madurl',help='url of madridgal database',type=str,default='http://isr.sri.com/madrigal/')
+    p.add_argument('--madurl',help='url of madridgal database',type=str,default='http://cedar.openmadrigal.org/madrigal')
     p.add_argument('--odir',help='output directory to cache madridgal data in',type=str,default='maddata')
     p.add_argument('-i','--inst',help='instrument to access',type=str,default='Poker Flat IS Radar')
     p = p.parse_args()
