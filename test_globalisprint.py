@@ -23,7 +23,7 @@ def txt2h5(fn):
     with open(fn,'r') as f:
         head = f.readline().split()
 
-    # load data, here I lazily used from my globalisprint command that columns 1,2,5 were good data
+    # load data
     arr = loadtxt(fn,skiprows=1,usecols=gc)
     with h5py.File(h5fn,'w',libver='latest') as f:
         for i,c in enumerate(gc): #because we only read "good" columns
