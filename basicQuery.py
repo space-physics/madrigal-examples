@@ -55,25 +55,30 @@ def getexpdata(madobj,code,odir):
                                     day=e.endday,hour=e.endhour,minute=e.endmin,
                                     second=e.endsec)
 #%%
-    exparams=[]
-    for i in experiments.index:
-        print('downloading experiment id {} '.format(i))
-        expfile = madobj.getExperimentFiles(i)
-        experiments.at[i,'fn'] = expfile.name
-
-        exparams.append(madobj.getExperimentFileParameters(expfile))
+"""
+this part isn't done yet.
+Each experiment can have multiple files.
+It might be better to use a different query type, to simply query by a smaller date range
+"""
+#    exparams=[]
+#    for i in experiments.index:
+#        print('downloading experiment id {} '.format(i))
+#        expfile = madobj.getExperimentFiles(i)
+#        experiments.at[i,'fn'] = expfile.name
+#
+#        exparams.append(madobj.getExperimentFileParameters(expfile))
 
        #not yet
         #ofn = join(odir,expfile.name)
        #print('saving {}'.format(ofn))
         #madobj.downloadFile(expfile, ofn,"hdf5")
 
-    return experiments,exparams
+    return experiments
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
     p = ArgumentParser(description="basic example of using Madrigal")
-    p.add_argument('--madurl',help='url of madridgal database',type=str,default='http://cedar.openmadrigal.org/madrigal')
+    p.add_argument('--madurl',help='url of madridgal database',type=str,default='http://isr.sri.com/madrigal')
     p.add_argument('--odir',help='output directory to cache madridgal data in',type=str,default='maddata')
     p.add_argument('-i','--inst',help='instrument to access',type=str,default='Poker Flat IS Radar')
     p = p.parse_args()
@@ -81,6 +86,6 @@ if __name__ == '__main__':
     print('downloading madrigal site object')
     madobj = MW.MadrigalData(p.madurl) #this has several methods
 
-    pfisr={'code':madname2code(madobj,p.inst)} #get the PFISR code
+    instr={'code':madname2code(madobj,p.inst)} #get the PFISR code
 
-    experiments,exparams = getexpdata(madobj,pfisr['code'],p.odir)
+    experiments = getexpdata(madobj,instr['code'],p.odir)
