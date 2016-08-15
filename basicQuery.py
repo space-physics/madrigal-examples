@@ -6,9 +6,6 @@ https://scivision.co/madrigal-api-install-and-basic-example-for-geospace-remote-
 
 """
 from __future__ import print_function,division
-from six import PY3
-if PY3:
-    exit('currently Madrigal is for Python<=2.7 (sigh)')
 #
 try:
     from madrigalWeb import madrigalWeb as MW
